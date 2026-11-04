@@ -69,8 +69,8 @@
   <div class="date" id="date"></div>
   <form id="search" autocomplete="off">
     <span>❯</span>
-    <input id="q" autofocus placeholder="search · g ddg yt gh aw aur w r">
-    <span class="engine" id="engine">ddg</span>
+    <input id="q" autofocus placeholder="search · g ddg yt gh aw aur w r c">
+    <span class="engine" id="engine">g</span>
   </form>
   <nav>
     <a href="https://github.com"><b>gh</b> github</a>
@@ -92,9 +92,10 @@
     aw: "https://wiki.archlinux.org/index.php?search=%s",
     aur: "https://aur.archlinux.org/packages?K=%s",
     w: "https://en.wikipedia.org/w/index.php?search=%s",
-    r: "https://www.reddit.com/search/?q=%s"
+    r: "https://www.reddit.com/search/?q=%s",
+    c: "https://claude.ai/new?q=%s"
   };
-  const fallback = "ddg";
+  const fallback = "g";
   const q = document.getElementById("q");
   const label = document.getElementById("engine");
 

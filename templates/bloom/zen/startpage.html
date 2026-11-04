@@ -32,16 +32,9 @@
     display: grid;
     place-items: center;
   }
-  /* Material Symbols Rounded comes with the bloom style; without it the icon names show as words */
-  .ms {
-    font-family: "Material Symbols Rounded";
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 1;
-    font-variation-settings: "FILL" 0, "wght" 500, "opsz" 24;
-    user-select: none;
-  }
+  /* Icons are drawn here, so the page needs no icon font */
+  .mark { width: 26px; height: 26px; flex: none; }
+  .icon { width: 22px; height: 22px; flex: none; }
   main {
     width: min(720px, calc(100vw - 32px));
     background: var(--surface);
@@ -51,16 +44,17 @@
   }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
   .head { display: flex; align-items: center; gap: 10px; color: var(--primary); font-weight: 600; margin-bottom: 14px; }
-  .head .ms { font-size: 24px; font-variation-settings: "FILL" 1, "wght" 500, "opsz" 24; }
   .clock { font-size: 76px; font-weight: 500; line-height: 1; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
   .date { color: var(--dim); margin: 8px 0 26px; }
   form {
     display: flex; align-items: center; gap: 12px;
     background: var(--container); border-radius: 999px; padding: 12px 14px 12px 18px;
-    outline: 2px solid transparent; transition: outline-color .2s;
+    border: 1.5px solid var(--outline); transition: border-color .2s, box-shadow .2s;
   }
-  form:focus-within { outline-color: var(--primary); }
-  form > .ms { color: var(--dim); }
+  form:hover { border-color: var(--dim); }
+  form:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 22%, transparent); }
+  form > .icon { color: var(--dim); }
+  form:focus-within > .icon { color: var(--primary); }
   input {
     flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
     color: var(--text); font: inherit; font-size: 18px;
@@ -86,13 +80,13 @@
 </head>
 <body>
 <main>
-  <div class="head"><span class="ms">local_florist</span>facet</div>
+  <div class="head"><svg class="mark" viewBox="60 60 392 392" aria-hidden="true"><mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512"><path d="M138 76L374 76L436 138L436 374L374 436L138 436L76 374L76 138Z" fill="#fff"/><path d="M188 158L324 158L354 188L354 324L324 354L188 354L158 324L158 188ZM138 76L188 158M374 76L324 158M436 138L354 188M436 374L354 324M374 436L324 354M138 436L188 354M76 374L158 324M76 138L158 188" fill="none" stroke="#000" stroke-width="18"/></mask><g mask="url(#cut)"><path d="M138 76L374 76L436 138L436 374L374 436L138 436L76 374L76 138Z" fill="var(--primary)"/><path d="M138 76L374 76L324 158L188 158ZM76 138L138 76L188 158L158 188Z" fill="var(--text)" opacity=".55"/><path d="M76 374L76 138L158 188L158 324Z" fill="var(--tertiary)"/></g></svg>facet</div>
   <div class="clock" id="clock">--:--</div>
   <div class="date" id="date"></div>
   <form id="search" autocomplete="off">
-    <span class="ms">search</span>
-    <input id="q" autofocus placeholder="Search · g ddg yt gh aw aur w r">
-    <span class="engine" id="engine">ddg</span>
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input id="q" autofocus placeholder="Search · g ddg yt gh aw aur w r c">
+    <span class="engine" id="engine">g</span>
   </form>
   <nav>
     <a href="https://github.com"><b>gh</b>GitHub</a>
@@ -114,9 +108,10 @@
     aw: "https://wiki.archlinux.org/index.php?search=%s",
     aur: "https://aur.archlinux.org/packages?K=%s",
     w: "https://en.wikipedia.org/w/index.php?search=%s",
-    r: "https://www.reddit.com/search/?q=%s"
+    r: "https://www.reddit.com/search/?q=%s",
+    c: "https://claude.ai/new?q=%s"
   };
-  const fallback = "ddg";
+  const fallback = "g";
   const q = document.getElementById("q");
   const label = document.getElementById("engine");
 
